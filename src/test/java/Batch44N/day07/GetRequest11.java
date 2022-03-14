@@ -69,6 +69,7 @@ Status kodunun 200, dönen body de,
 
     // 3. yontem  ==> De-Serialization ; iki yontem ile  1-object mapper    2- mapleri ile pojo class ile birlikte map
 
+        // sonraki class icinde
 
     }
 }

@@ -13,7 +13,7 @@ import java.util.HashMap;
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.equalTo;
 
-public class GetRequestTestData extends JsonPlaceHolderTestBase {
+public class GetRequest11TestData extends JsonPlaceHolderTestBase {
     @Test
     public void test01(){
         specJPH.pathParams("param1","todos","param2",2);
@@ -51,7 +51,13 @@ public class GetRequestTestData extends JsonPlaceHolderTestBase {
         Assert.assertEquals(expectedData.get("completed"),jsonPath.getBoolean("completed"));
 
         // 3. yontem  ==> De-Serialization ; iki yontem ile  1-object mapper    2- mapleri ile pojo class ile birlikte map
-
-
+        //map olusturup , responedan donen actual datayi aktaracagiz
+        HashMap<String , Object> actualData=response.as(HashMap.class);
+        //responsedan gelen datatyi al , map gibi al ve ata, as , 2 kutuphane biri mape aktarmaya, digeri datatypei vs belirleyici
+        System.out.println("actualData = " + actualData);
+        
+        Assert.assertEquals(expectedData.get("userId"),actualData.get("userId"));  //yine mapin icine sadece Body kismi geliyor.
+        Assert.assertEquals(expectedData.get("title"),actualData.get("title"));
+        Assert.assertEquals(expectedData.get("completed"),actualData.get("completed"));
     }
 }
