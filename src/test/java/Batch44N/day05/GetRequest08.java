@@ -56,7 +56,7 @@ http://dummy.restapiexample.com/api/v1/employees url’inde bulunan
 
         Assert.assertEquals("Ashton Cox",jsonPath.getString("data[2].employee_name"));
 
-        System.out.println("----\nSon kisinin ismi = " + jsonPath.getString("data[-1].employee_name")+jsonPath.getString("data[-1].employee_age"));
+        System.out.println("----\nSon kisinin ismi ve yasi= " + jsonPath.getString("data[-1].employee_name")+" - "+jsonPath.getString("data[-1].employee_age"));
 
     }
 
