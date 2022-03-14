@@ -1,4 +1,4 @@
-package Batch44N.day06;
+package Batch44N.day07;
 
 import Batch44N.testBase.DummyTestBase;
 import io.restassured.http.ContentType;
@@ -49,6 +49,7 @@ bunların içerisinde “Charde Marshall” olduğunu test edin
         ageList.get(ageList.size()-1);          //siralanan listedeki son elemani getirelim.
         Assert.assertEquals(23,(int)ageList.get(ageList.size()-1));
 
+        //Groovy Java'nin alt dilidir. Bu dil yardimi ile, loop kullanmadan gelen response daki degerleri bir sarta bagli sekilde yazdirabiliiyoruz
         List<Integer> salaryNameList=jsonPath.getList("data.findAll{it.employee_salary>350000}.employee_name");
                                                     // salary buyuk olanlarin, namelerini getir.
         System.out.println("salaryNameList :  "+ salaryNameList+"\n salaryNameList Size : "+salaryNameList.size());

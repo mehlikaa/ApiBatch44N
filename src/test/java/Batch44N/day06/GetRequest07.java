@@ -1,4 +1,4 @@
-package Batch44N.day05;
+package Batch44N.day06;
 
 import Batch44N.testBase.HerOkuAppTestBase;
 import io.restassured.http.ContentType;
