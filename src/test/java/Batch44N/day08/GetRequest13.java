@@ -4,16 +4,15 @@ import Batch44N.testBase.DummyTestBase;
 import Batch44N.testData.DummyTestData;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
-import org.junit.Assert;
-import org.junit.Test;
-
-import java.util.HashMap;
+import org.junit.*;
+import java.util.*;
 
 import static io.restassured.RestAssured.given;
 
 public class GetRequest13 extends DummyTestBase {
     /*
-http://dummy.restapiexample.com/api/v1/employees url ine bir istek gönderildiğinde Status kodun 200 olduğunu,
+http://dummy.restapiexample.com/api/v1/employees url ine bir istek gönderildiğinde
+Status kodun 200 olduğunu,
 5. Çalışan isminin "Airi Satou" olduğunu ,
 çalışan sayısının 24 olduğunu,
 Sondan 2. çalışanın maaşının 106450 olduğunu
@@ -27,17 +26,6 @@ Sondan 2. çalışanın maaşının 106450 olduğunu
 
            -- >hepsini tutan buyuk bir map de olacak
      */
-     /*
------{
-    "status": "success",
-    "data": [
-        {   "id": 1,
-            "employee_name": "Tiger Nixon",
-            "employee_salary": 320800,
-            "employee_age": 61,
-            "profile_image": ""
-        },
-     */
     @Test
     public void test01(){
 
@@ -46,9 +34,7 @@ Sondan 2. çalışanın maaşının 106450 olduğunu
         DummyTestData expectedObj=new DummyTestData();
 
         HashMap<String,Object> expectedDataMap=expectedObj.setupDumTestData();  //map dondurur ve bunu mape aktar tanimla
-
         System.out.println("expectedDataMap = " + expectedDataMap);
-
 
         //request
         Response response=given().
@@ -56,9 +42,52 @@ Sondan 2. çalışanın maaşının 106450 olduğunu
                             spec(specDum).
                             when().
                             get("/{param1}");
-        response.prettyPrint();
+        //response.prettyPrint();
 
-        Assert.assertEquals(expectedDataMap.get("employee_name"),);
+        // de serialization islemi
+        HashMap<String, Object> actualDataMap=response.as(HashMap.class);
+        System.out.println("actualDataMap = " + actualDataMap);
+//Status kodun 200 olduğunu,
+        Assert.assertEquals(expectedDataMap.get("statusCode"),response.getStatusCode());  //body icinde olmadigi icin responsedan aldik.
+        // //5. Çalışan isminin "Airi Satou" olduğunu ,
+        Assert.assertEquals(expectedDataMap.get("besinciCalisan"),
+                            ((Map)((List)actualDataMap.get("data")).get(4)).get("employee_name"));
+        //                                              (4.indexte Map var)(list dondurecek)(datanin icine girdim)
+        //çalışan sayısının 24 olduğunu,
+        // ???? neden list
+        Assert.assertEquals(expectedDataMap.get("calisanSayisi"),
+                        ((List) actualDataMap.get("data")).size());
+
+        //Sondan 2. çalışanın maaşının 106450 olduğunu
+        //once bize donen datanin sizeini bulmaliyiz
+        int dataSize=((List) actualDataMap.get("data")).size();
+        Assert.assertEquals(expectedDataMap.get("sondanIkinciCalisan"),
+                ((Map)((List) actualDataMap.get("data")).get(dataSize-2)).get("employee_salary"));
+
+    //40,21 ve 19 yaslarında çalışanlar olup olmadığını     --> key value yok yaslar list cagir
+    //birer assert edebilirim, employee ageleri bir liste atarsam
+        List<Integer>  actualYasListesi=new ArrayList<>();
+        for (int i = 0; i < dataSize; i++) {
+            actualYasListesi.add((Integer)(((Map)((List) actualDataMap.get("data")).get(i)).get("employee_age")));
+        }
+        System.out.println("actualYasListesi = " + actualYasListesi);
+        Assert.assertTrue(actualYasListesi.containsAll(   (List) expectedDataMap.get("arananYaslar"))   );
+
+//11. Çalışan bilgilerinin
+//      “id”:”11”       "employee_name": "Jena Gaines",   "employee_salary": "90560",
+//      "employee_age": "30", "profile_image": ""  -- olduğunu test edin.
+
+        Assert.assertEquals(((Map)expectedDataMap.get("onbirinciCalisan")).get("employee_name"),
+                            ((Map)((List) actualDataMap.get("data")).get(10)).get("employee_name"));
+        Assert.assertEquals(((Map)expectedDataMap.get("onbirinciCalisan")).get("employee_salary"),
+                            ((Map)((List) actualDataMap.get("data")).get(10)).get("employee_salary"));
+        Assert.assertEquals(((Map)expectedDataMap.get("onbirinciCalisan")).get("employee_age"),
+                            ((Map)((List) actualDataMap.get("data")).get(10)).get("employee_age"));
+        Assert.assertEquals(((Map)expectedDataMap.get("onbirinciCalisan")).get("profile_image"),
+                            ((Map)((List) actualDataMap.get("data")).get(10)).get("profile_image"));
+
+
+
     }
 
 }
