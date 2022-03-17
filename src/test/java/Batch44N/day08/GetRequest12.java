@@ -2,7 +2,6 @@ package Batch44N.day08;
 
 import Batch44N.testBase.HerOkuAppTestBase;
 import Batch44N.testData.HerOkuAppTestData;
-import io.restassured.http.ContentType;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import org.junit.Assert;
