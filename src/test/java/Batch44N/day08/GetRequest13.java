@@ -12,12 +12,12 @@ import static io.restassured.RestAssured.given;
 public class GetRequest13 extends DummyTestBase {
     /*
 http://dummy.restapiexample.com/api/v1/employees url ine bir istek gönderildiğinde
-Status kodun 200 olduğunu,
-5. Çalışan isminin "Airi Satou" olduğunu ,
-çalışan sayısının 24 olduğunu,
-Sondan 2. çalışanın maaşının 106450 olduğunu
-40,21 ve 19 yaslarında çalışanlar olup olmadığını     --> key value yok yaslar list cagir
-11. Çalışan bilgilerinin
+1- Status kodun 200 olduğunu,
+2- 5. Çalışan isminin "Airi Satou" olduğunu ,
+3- çalışan sayısının 24 olduğunu,
+4- Sondan 2. çalışanın maaşının 106450 olduğunu
+5- 40,21 ve 19 yaslarında çalışanlar olup olmadığını     --> key value yok yaslar list cagir
+6- 11. Çalışan bilgilerinin
 {
 “id”:”11”                       --> key-value = map olusturulacak
 "employee_name": "Jena Gaines",
@@ -38,13 +38,13 @@ Sondan 2. çalışanın maaşının 106450 olduğunu
 
         //request
         Response response=given().
-                            accept(ContentType.JSON).
+                            accept("application/json").   //accept(ContentType.JSON).
                             spec(specDum).
                             when().
                             get("/{param1}");
         //response.prettyPrint();
 
-        // de serialization islemi
+        // De-serialization islemi                                          //Serialization
         HashMap<String, Object> actualDataMap=response.as(HashMap.class);
         System.out.println("actualDataMap = " + actualDataMap);
 //Status kodun 200 olduğunu,
@@ -52,15 +52,18 @@ Sondan 2. çalışanın maaşının 106450 olduğunu
         // //5. Çalışan isminin "Airi Satou" olduğunu ,
         Assert.assertEquals(expectedDataMap.get("besinciCalisan"),
                             ((Map)((List)actualDataMap.get("data")).get(4)).get("employee_name"));
-        //                                              (4.indexte Map var)(list dondurecek)(datanin icine girdim)
+        Assert.assertEquals(expectedDataMap.get("besinciCalisan"),
+                ((Map) ((List) actualDataMap.get("data")).get(4)).get("employee_name"));
+        //   (4.indexte Map var)(list dondurecek)(datanin icine girdim)
         //çalışan sayısının 24 olduğunu,
-        // ???? neden list
+
         Assert.assertEquals(expectedDataMap.get("calisanSayisi"),
                         ((List) actualDataMap.get("data")).size());
 
         //Sondan 2. çalışanın maaşının 106450 olduğunu
         //once bize donen datanin sizeini bulmaliyiz
         int dataSize=((List) actualDataMap.get("data")).size();
+
         Assert.assertEquals(expectedDataMap.get("sondanIkinciCalisan"),
                 ((Map)((List) actualDataMap.get("data")).get(dataSize-2)).get("employee_salary"));
 
@@ -74,8 +77,11 @@ Sondan 2. çalışanın maaşının 106450 olduğunu
         Assert.assertTrue(actualYasListesi.containsAll(   (List) expectedDataMap.get("arananYaslar"))   );
 
 //11. Çalışan bilgilerinin
-//      “id”:”11”       "employee_name": "Jena Gaines",   "employee_salary": "90560",
-//      "employee_age": "30", "profile_image": ""  -- olduğunu test edin.
+//      “id”:”11”
+//      "employee_name": "Jena Gaines",
+//      "employee_salary": "90560",
+//      "employee_age": "30",
+//      "profile_image": ""  -- olduğunu test edin.
 
         Assert.assertEquals(((Map)expectedDataMap.get("onbirinciCalisan")).get("employee_name"),
                             ((Map)((List) actualDataMap.get("data")).get(10)).get("employee_name"));

@@ -28,4 +28,8 @@ public class HerOkuAppTestData {
         //distaki mapi dondururum
         return expectedData;
     }
+
+    public void setupTestandRequestData(){
+
+    }
 }
