@@ -1,5 +1,8 @@
 package Batch44N.testData;
 
+
+import org.json.JSONObject;
+
 import java.util.HashMap;
 
 public class HerOkuAppTestData {
@@ -29,7 +32,23 @@ public class HerOkuAppTestData {
         return expectedData;
     }
 
-    public void setupTestandRequestData(){
+    public JSONObject setupTestandRequestData(){
+//import org.json.JSONObject;'dan import edilmeli
+        //  icteki veri
+        JSONObject bookingdatesJsonO=new JSONObject();   // Map benzeri, type'a kendisi karar veriyor. Degerleri key-value alir.
+        bookingdatesJsonO.put("checkin","s021-01-05");
+        bookingdatesJsonO.put("checkout","2021-01-10");
+
+        //distaki veri(map)
+        JSONObject expectedRequestJsonO=new JSONObject();
+        expectedRequestJsonO.put("firstname","Batch44");
+        expectedRequestJsonO.put("lastname","bitti bile");
+        expectedRequestJsonO.put("totalprice",123);
+        expectedRequestJsonO.put("depositpaid",false);
+        expectedRequestJsonO.put("bookingdates",bookingdatesJsonO);
+
+        return expectedRequestJsonO;
+
 
     }
 }
