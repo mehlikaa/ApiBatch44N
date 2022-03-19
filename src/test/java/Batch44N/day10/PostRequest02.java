@@ -49,7 +49,6 @@ public class PostRequest02 extends HerOkuAppTestBase {
                 .body(expectedRequestData.toString())  //JsonObject .toString yazmak zorundayiz
                 .when()
                 .post("/{param1}");
-
         response.prettyPrint();
 
         //deserialization
