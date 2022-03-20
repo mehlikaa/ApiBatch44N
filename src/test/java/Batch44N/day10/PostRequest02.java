@@ -54,6 +54,7 @@ public class PostRequest02 extends HerOkuAppTestBase {
         //deserialization
         HashMap<String, Object> actualDataMap=response.as(HashMap.class);
         System.out.println("actualDataMap = " + actualDataMap);
+
         Assert.assertEquals(expectedRequestData.getString("firstname"),
                             ((Map) actualDataMap.get("booking")).get("firstname"));
         Assert.assertEquals(expectedRequestData.getString("lastname"),
@@ -62,10 +63,10 @@ public class PostRequest02 extends HerOkuAppTestBase {
                             ((Map) actualDataMap.get("booking")).get("totalprice"));
         Assert.assertEquals(expectedRequestData.getBoolean("depositpaid"),
                             ((Map) actualDataMap.get("booking")).get("depositpaid"));
-        Assert.assertEquals(expectedRequestData.getJSONObject("bookingdates"),
+        Assert.assertEquals(expectedRequestData.getJSONObject("bookingdates").get("checkin"),
                 ((Map) ((Map) actualDataMap.get("booking")).get("bookingdates")).get("checkin") );
-        Assert.assertEquals(expectedRequestData.getJSONObject("bookingdates"),
-                ((Map) ((Map) actualDataMap.get("booking")).get("bookingDATES")).get("checkout"));
+        Assert.assertEquals(expectedRequestData.getJSONObject("bookingdates").get("checkout"),
+                ((Map) ((Map) actualDataMap.get("booking")).get("bookingdates")).get("checkout"));
 
         //JsonPath
         JsonPath jsonPath=response.jsonPath();  //responsedan gelen datayi al, Json icine at
