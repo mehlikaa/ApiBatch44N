@@ -23,3 +23,15 @@ pojo ufak bir dezavantaji
 wrapper Boolean
 icin get gelir ama
 Pojo classta kaliba geri gidince bi degisiklikte butun getter setter bile degismeli
+
+obje olusturdugumda, kaliba dokemem
+
+      //Test datasi olustur   // 2 li datasi olan request data olacak
+                                // uclu olan expected datam olacak
+
+request ic kisimdan
+expected dis kisimdan olusacak
+ pojo 3 tane  , deger atayacagim en icten disa 3 une de
+        2 olusan request
+        3lu yapi olani expected icin kullanilacak
+
