@@ -42,4 +42,21 @@ public class JPHTestData {
 
         return expectedRequest;
     }
+// class   PatchRequest01
+    public JSONObject setupPatchRequestData(){
+        JSONObject requestDatajsonO=new JSONObject();
+        requestDatajsonO.put("title", "Api calismaliyim");
+
+        return requestDatajsonO;
+    }
+    public JSONObject setupPatchExpectedData(){
+
+        JSONObject expectedDataJsonO=new JSONObject();
+        expectedDataJsonO.put("userId",10);
+        expectedDataJsonO.put("title","Api calismaliyim");
+        expectedDataJsonO.put("completed",true);
+        expectedDataJsonO.put("id",198);
+
+        return expectedDataJsonO;
+    }
 }

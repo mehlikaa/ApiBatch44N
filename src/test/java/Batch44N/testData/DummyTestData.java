@@ -1,5 +1,6 @@
 package Batch44N.testData;
 
+import org.json.JSONObject;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -79,6 +80,17 @@ En küçük yaşın 19 olduğunu,
         expectedDataMap.put("message","Successfully! Record has been added.");
 
         return expectedDataMap;
+
+    }
+
+    public JSONObject setupDeleteExpectedData(){
+        JSONObject expectedDataJO=new JSONObject();
+        expectedDataJO.put("status","success");
+        expectedDataJO.put("data","2");
+        expectedDataJO.put("message", "Successfully! Record has been deleted");
+
+                return expectedDataJO;
+
 
     }
 
