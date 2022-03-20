@@ -1,0 +1,25 @@
+POJO
+
+// encapsulation, data hiding yontemidir,
+//pojo class - encapsulation (yontemi) kullanilan bir class olacak
+    //  1- keyvaluenun, key private  --  initialize yapmiyoruz
+    //  2- bunlara ulasabilecek   public getter setter metodlar olusturalim
+                //sag tik yada Code --> Generate --> Getter and Setter sec ve hepsini secebilirsin
+                                                    Constructor
+                                                    toString sec
+    //  3- parametreli(ilk deger atamasi icin) ve parametresiz constructor
+    // 4- toString metodu olustur
+
+OOP
+Encapsulation -> API testi icin POJO classta kullandim
+Inheritance --> TestBase class lar icin
+Abstraction -> yapi olarak ben eger kendisine extends eden classlardan
+                butun metodlar childlarda kullanilsin isterseniz
+polimorphism --> interface bir class lardan obje uretemeyince
+                Array and ArrayList gibi
+                overloading over...?
+
+pojo ufak bir dezavantaji
+wrapper Boolean
+icin get gelir ama
+Pojo classta kaliba geri gidince bi degisiklikte butun getter setter bile degismeli
