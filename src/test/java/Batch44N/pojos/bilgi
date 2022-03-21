@@ -1,4 +1,7 @@
 POJO
+*** degisken isimlerini kendine gore yazarsa actual data ile uyumsuzluk olusacagindan
+tum isimleri yenilemek gerekebilir.
+Bu yuzden. kac pojo classi olamli vs inceleyip kendimiz olusturmamiz daha iyi olacaktir.
 
 // encapsulation, data hiding yontemidir,
 //pojo class - encapsulation (yontemi) kullanilan bir class olacak

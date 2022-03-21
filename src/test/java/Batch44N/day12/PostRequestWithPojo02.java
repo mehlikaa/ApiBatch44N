@@ -2,11 +2,14 @@ package Batch44N.day12;
 
 import Batch44N.pojos.BookingDatesPojo;
 import Batch44N.pojos.BookingPojo;
+import Batch44N.pojos.BookingResponsePojo;
 import Batch44N.testBase.HerOkuAppTestBase;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
+import org.junit.Assert;
 import org.junit.Test;
 
+import static io.restassured.RestAssured.expect;
 import static io.restassured.RestAssured.given;
 
 public class PostRequestWithPojo02 extends HerOkuAppTestBase {
@@ -50,6 +53,19 @@ public class PostRequestWithPojo02 extends HerOkuAppTestBase {
                 .post("/{param1}");
 
         response.prettyPrint();
+
+        BookingResponsePojo actualData=response.as(BookingResponsePojo.class);
+
+        Assert.assertEquals(200,response.getStatusCode());
+        Assert.assertEquals(bookingPj.getFirstname(),actualData.getBooking().getFirstname());
+        Assert.assertEquals(bookingPj.getLastname(),actualData.getBooking().getLastname());
+        Assert.assertEquals(bookingPj.getTotalprice(),actualData.getBooking().getTotalprice());
+        Assert.assertEquals(bookingPj.isDepositpaid(),actualData.getBooking().isDepositpaid());
+        Assert.assertEquals(bookingPj.getBookingdates().getCheckin(),
+                                actualData.getBooking().getBookingdates().getCheckin());
+        Assert.assertEquals(bookingPj.getBookingdates().getCheckout(),
+                                actualData.getBooking().getBookingdates().getCheckout());
+
 
     }
 
