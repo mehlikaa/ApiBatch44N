@@ -1,4 +1,4 @@
-package Batch44N.day13.pojos;
+package Batch44N.day13.JsonSchema02.pojos;
 
 public class Data {
 
