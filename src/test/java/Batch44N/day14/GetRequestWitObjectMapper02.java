@@ -24,6 +24,7 @@ Olduğunu Object Mapper kullanarak test edin */
 
     @Test
     public void test01(){
+        System.out.println("Hello World ");
         specHOA.pathParams("param1","booking", "param2","2");
 
         //expected data olusturabilmek icin,reusable metoduma gonderecegim String parametremi olusturalim.
